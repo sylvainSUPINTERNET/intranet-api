@@ -22,7 +22,8 @@ function checkToken(req, callback) {
 
     // check header or url parameters or post parameters for token
     let token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies.token;
-
+    console.log("check token", typeof token, token);
+    console.log("secret", typeof app.get('superSecret'), app.get('superSecret'));
     let response_data = {
         message: "",
         error: false
@@ -33,9 +34,11 @@ function checkToken(req, callback) {
         // verifies secret and checks exp
         jwt.verify(token, app.get('superSecret'), function (err, decoded) {
             if (err) {
+                console.log('token : error');
                 response_data = {message: err, error: true};
                 callback(response_data);
             } else {
+                console.log('token : ok');
                 // if everything is good, save to request for use in other routes
                 req.decoded = decoded; //get all data passé lors de la création du jwt (encodé avant) qui ici sont décodé en objet json
                 response_data = {message: token, error: false, user_decoded_from_jwt: decoded};

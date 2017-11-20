@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
+const ObjectId  = mongoose.Schema.Types.ObjectId; //permet de creer un champ qui sera un d'objectId de custommer par exemple
 
 const userSchema = new mongoose.Schema({
     name: String,
@@ -17,6 +18,12 @@ const userSchema = new mongoose.Schema({
     salt: String,
     email: String,
     date_registration: Date,
+    maters: [
+        {
+            type: ObjectId,
+            ref: 'Mater'
+        }
+    ]
 });
 
 module.exports = mongoose.model('User', userSchema);

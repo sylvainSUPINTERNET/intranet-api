@@ -18,13 +18,9 @@ const jwt = require('jsonwebtoken');
 const sha256 = require('sha256');
 
 
-// /* MODELS */
-const UserModel = require('./models/User.model');
-
-
 // /* CONTROLLER */
 const UserCtrl = require('./controllers/User.controller');
-
+const MaterCtrl = require('./controllers/Mater.controller');
 
 /* server instanciate and config router */
 const api = express();
@@ -55,6 +51,8 @@ api.post('/user/add', function(req,res){
     UserCtrl.addUser(req,res);
 });
 
+//todo : => client setCookie token received from message api !!!! et le send pour chaque requete evidement
+
 api.get('/user/logout', function(req,res){
     UserCtrl.logoutUser(req,res);
 });
@@ -68,10 +66,36 @@ api.get('/user/list', function(req,res){
     UserCtrl.listUser(req,res);
 });
 
-//TODO : // coté client, recuperer la réponse de l'api le token et le store dans cookie (utiliser ensuite sur toute les routs api)
+
+/* MATER */
+api.post('/mater/add', function(req,res){
+    MaterCtrl.addMater(req,res);
+});
+
+api.post('/mater/addUser', function(req,res){
+    MaterCtrl.addUserForMater(req,res);
+});
+
+api.get('/mater/list', function(req,res){
+    MaterCtrl.listMater(req,res);
+});
 
 
 
+
+//OSEF juste pour tester les posts (car le token est mal gérer par postman)
+// TEST form (for post query because dosnt work with postman)
+api.get('/mater/add/test',function(req,res){
+    res.sendfile('form_for_test/test_add_matter.html');
+});
+
+api.get('/mater/addUser/test',function(req,res){
+    res.sendfile('form_for_test/test_add_user_for_matter.html');
+});
+
+api.get('/user/add/test',function(req,res){
+    res.sendfile('form_for_test/test_add_user.html');
+});
 
 
 
