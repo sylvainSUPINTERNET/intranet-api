@@ -23,7 +23,8 @@ const userSchema = new mongoose.Schema({
             type: ObjectId,
             ref: 'Mater'
         }
-    ]
+    ],
+    role: String,
 });
 
 module.exports = mongoose.model('User', userSchema);
