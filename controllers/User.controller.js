@@ -80,7 +80,7 @@ module.exports = {
                                 salt: salt,
                                 email: email,
                                 date_registration: new Date(),
-                                role: "ROLE_USER"
+                                role: "ROLE_ETUDIANT" //ROLE_TEACHER
                             });
 
 
@@ -182,6 +182,31 @@ module.exports = {
         });
 
     },
+    promoteUser: function(req,res){
+        let dataPosted = req.body
+        checkToken(req, function (data) { //data est la reponse JSON du test du token si success => token SINON error message classic
+            if (data.error === true) {
+                //error
+                res.json(data)
+            } else {
+                //call mongoose
+                User.find({name: dataPosted.name}).then(function (user) {
+                    if(user){
+                        user[0].role = dataPosted.role;
+                        user[0].save(function(err, userUpdated){
+                            res.json({error: false, message: userUpdated})
+                        }).catch(err => console.log(err));
+                    }else{
+                        res.json({error: true, message: "User is not definied !"})
+                    }
+                }).catch(err => console.log())
+                //erreur mongoose
+                    .catch(function (err) {
+                        res.json(err)
+                    });
+            }
+        });
+    }
 
     //TODO: // suite route API
 };

@@ -62,8 +62,14 @@ api.post('/user/login', function(req,res){
 });
 
 /* API -> need to be connected or logged before and get his token into cookie to used these routes */
+
+/* USER */
 api.get('/user/list', function(req,res){
     UserCtrl.listUser(req,res);
+});
+
+api.post('/user/promote', function(req,res){
+    UserCtrl.promoteUser(req,res);
 });
 
 
@@ -82,6 +88,15 @@ api.get('/mater/list', function(req,res){
 
 
 
+/* NOTE */
+
+
+
+
+
+
+
+
 
 //OSEF juste pour tester les posts (car le token est mal gérer par postman)
 // TEST form (for post query because dosnt work with postman)
@@ -95,6 +110,10 @@ api.get('/mater/addUser/test',function(req,res){
 
 api.get('/user/add/test',function(req,res){
     res.sendfile('form_for_test/test_add_user.html');
+});
+
+api.get('/user/promote/test',function(req,res){
+    res.sendfile('form_for_test/test_promote_user.html');
 });
 
 
