@@ -21,6 +21,7 @@ const sha256 = require('sha256');
 // /* CONTROLLER */
 const UserCtrl = require('./controllers/User.controller');
 const MaterCtrl = require('./controllers/Mater.controller');
+const NoteCtrl = require('./controllers/Note.controller');
 
 /* server instanciate and config router */
 const api = express();
@@ -80,6 +81,9 @@ api.get('/mater/list', function(req,res){
     MaterCtrl.listMater(req,res);
 });
 
+api.get('/note/list', function(req,res){
+    NoteCtrl.listNote(req,res);
+});
 
 
 

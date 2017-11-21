@@ -32,7 +32,7 @@ module.exports = {
                 res.json(data)
             } else {
                 let dataPostedByApp = req.body; //json received from API call app post
-                let materName = dataPostedByApp.name
+                let materName = dataPostedByApp.name;
                 if(materName !== ""){
                     //TODO save new matter (then add field to attribute with user One user Many maters
                     let mater = new Mater({
@@ -40,7 +40,7 @@ module.exports = {
                     });
                     mater.save(function(err){
                         if(err)
-                            console.log("error while insert new mater", err)
+                            console.log("error while insert new mater", err);
                         else
                             res.json({error: false, message:"Your mater inserted with success !"})
 
