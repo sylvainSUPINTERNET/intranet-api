@@ -70,7 +70,7 @@ module.exports = {
                                     //todo insert user into mater
                                     //todo mater into user
                                 //list array => populate to display user per mater
-                                console.log("MY USER" , userFound)
+                                console.log("MY USER" , userFound);
                                 console.log("MY MATER", materFound);
 
                                 userFound[0].maters.push(materFound[0]._id);
